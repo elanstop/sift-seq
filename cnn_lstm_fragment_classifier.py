@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 input_viral_DNA = 'viral_length_100_reads.txt'
 
 #file from which to pull human reads
-input_human_DNA = 'more_human_length_100_reads.txt'
+input_human_DNA = 'human_length_100_reads.txt'
 
 #name of trained model
 saved_model = 'saved_model.h5'

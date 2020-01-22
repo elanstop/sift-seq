@@ -79,7 +79,7 @@ class genome_data(object):
 
 
 
-genome_data("viral_dna_genomes.fasta","viral_length_100_reads.txt")
+genome_data("minimal_virus_data.fasta","viral_length_100_reads.txt")
 
 
 

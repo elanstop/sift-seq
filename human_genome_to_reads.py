@@ -88,7 +88,7 @@ class genome_data(object):
 
 
 
-genome_data("human.fa","human_length_100_reads.txt")
+genome_data("minimal_human_data.fasta","human_length_100_reads.txt")
 
 
 
