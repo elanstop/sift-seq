@@ -1,9 +1,7 @@
 import numpy as np
 import pickle
-import tensorflow as tf
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout, Conv1D
-from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import train_test_split
 
@@ -25,7 +23,7 @@ class FragmentClassifier(object):
 		self.x_train, self.x_test, self.y_train, self.y_test = self.load_and_split()
 		self.classifier = self.classifier()
 		self.train = self.train()
-		#self.model_checkpoint = ModelCheckpoint('saved_model_2.{epoch:02d}-{val_loss:.2f}.hdf5')
+		# self.model_checkpoint = ModelCheckpoint('saved_model_2.{epoch:02d}-{val_loss:.2f}.hdf5')
 
 	def load_and_split(self):
 
