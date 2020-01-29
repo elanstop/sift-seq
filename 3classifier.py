@@ -8,13 +8,11 @@ from sklearn.model_selection import train_test_split
 
 class FragmentClassifier(object):
 
-    def __init__(self, input_viral_dna, input_human_dna, saved_model, saved_training_data, saved_test_data,
-                 read_length, num_data, test_fraction, epochs, batch_size):
+    def __init__(self, input_viral_dna, input_human_dna, input_bacterial_dna, read_length, num_data, test_fraction, epochs,
+                 batch_size):
         self.input_viral_dna = input_viral_dna
         self.input_human_dna = input_human_dna
-        self.saved_model = saved_model
-        self.saved_training_data = saved_training_data
-        self.saved_test_data = saved_test_data
+        self.input_bacterial_dna = input_bacterial_dna
         self.read_length = read_length
         self.num_data = num_data
         self.test_fraction = test_fraction
@@ -24,7 +22,6 @@ class FragmentClassifier(object):
         self.classifier = self.classifier()
         self.train = self.train()
 
-    # self.model_checkpoint = ModelCheckpoint('saved_model_2.{epoch:02d}-{val_loss:.2f}.hdf5')
 
     def load_and_split(self):
         virus_file = open(self.input_viral_dna, 'rb')
@@ -37,18 +34,15 @@ class FragmentClassifier(object):
         print('total number of human reads in input:', len(human_reads))
         human_file.close()
 
-        x = np.array(viral_reads[:self.num_data] + human_reads[:self.num_data])
-        y = np.array([1] * self.num_data + [0] * self.num_data)
+        bacterial_file = open(self.input_bacterial_dna, 'rb')
+        bacterial_reads = pickle.load(bacterial_file)
+        print('total number of bacterial reads in input:', len(bacterial_reads))
+        human_file.close()
+
+        x = np.array(viral_reads[:self.num_data] + human_reads[:self.num_data] + bacterial_reads[:self.num_data])
+        y = np.array([[0, 0, 1]] * self.num_data + [[0, 1, 0]] * self.num_data + [[1, 0, 0]] * self.num_data)
 
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=self.test_fraction)
-
-        test_file = open(self.saved_test_data, 'wb')
-        # pickle.dump([x_test, y_test], test_file)
-        test_file.close()
-
-        training_file = open(self.saved_training_data, 'wb')
-        # pickle.dump([x_train, y_train], training_file)
-        training_file.close()
 
         return x_train, x_test, y_train, y_test
 
@@ -63,23 +57,21 @@ class FragmentClassifier(object):
         # model.add(LSTM(97, input_shape=(97, 8)))
         model.add(LSTM(100))
         model.add(Dropout(0.5))
-        model.add(Dense(1, activation='sigmoid'))
+        model.add(Dense(3, activation='softmax'))
         # model.compile(optimizer=Adam(), loss='binary_crossentropy', metrics=['accuracy'])
-        model.compile(optimizer='Adam', loss='binary_crossentropy', metrics=['accuracy'])
+        model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
         return model
 
     def train(self):
-        model_checkpoint = ModelCheckpoint('saved_model_2.{epoch:02d}-{val_accuracy:.2f}.hdf5')
+        model_checkpoint = ModelCheckpoint('new_mixed_3class.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
         classifier = self.classifier
         x_train, y_train = self.x_train, self.y_train
         x_test, y_test = self.x_test, self.y_test
         classifier.fit(x_train, y_train, batch_size=self.batch_size, epochs=self.epochs,
                        validation_data=(x_test, y_test), callbacks=[model_checkpoint])
-        classifier.save(self.saved_model)
 
 
 if __name__ == "__main__":
-    FragmentClassifier('viral_length_100_reads.txt', 'more_human_length_100_reads.txt', 'final_saved_model_2.h5',
-                       'saved_training_data_2.txt', 'saved_test_data_2.txt', read_length=100,
-                       num_data=1000, test_fraction=0.2,
-                       epochs=20, batch_size=100)
+    FragmentClassifier('training_viral_reads.txt', 'human_reads.txt', 'training_bacterial_reads.txt', read_length=100,
+                       num_data=50000, test_fraction=0.2,
+                       epochs=10, batch_size=100)

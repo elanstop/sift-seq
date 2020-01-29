@@ -1,5 +1,6 @@
 from Bio import SeqIO
 import pickle
+from random import shuffle
 
 # this file is different from viral_genomes_to_reads in the following ways:
 
@@ -16,7 +17,7 @@ import pickle
 class HumanGenomeData(object):
 	
 	def __init__(
-				self, input_filename, output_filename, read_length=100, genome_type='DNA', max_reads=1000):
+				self, input_filename, output_filename, read_length=100, genome_type='DNA', max_reads=6*10**5):
 		self.read_set = self.split_reads(input_filename, read_length, max_reads)
 		self.code_list, self.code_dict = self.make_nucleo_dict(genome_type)
 		self.one_hot_encoding = self.encoding()
@@ -83,7 +84,7 @@ class HumanGenomeData(object):
 
 
 if __name__ == "__main__":
-	HumanGenomeData("minimal_human_data.fasta", "human_length_100_reads.txt")
+	HumanGenomeData("human.fa", "human_reads.txt")
 
 
 

@@ -1,5 +1,6 @@
 from Bio import SeqIO
 import pickle
+from random import shuffle
 
 # default behavior is to output reads of length 100
 
@@ -68,10 +69,11 @@ class ViralGenomeData(object):
 
 	def output(self, output_filename):
 		reads_list = self.read_set
+		shuffle(reads_list)
 		output_file = open(output_filename, 'wb')
 		pickle.dump(reads_list, output_file)
 		output_file.close()
 
 
 if __name__ == "__main__":
-	ViralGenomeData("minimal_virus_data.fasta", "viral_length_100_reads.txt")
+	ViralGenomeData("training_viral_genomes.fasta", "training_viral_reads.txt")
