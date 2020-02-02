@@ -1,15 +1,18 @@
 import numpy as np
 import pickle
+# import tensorflow as tf
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout, Conv1D
 from tensorflow.keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import train_test_split
 
+# tf.compat.v1.disable_eager_execution()
+
 
 class FragmentClassifier(object):
 
-    def __init__(self, input_viral_dna, input_human_dna, input_bacterial_dna, read_length, num_data, test_fraction, epochs,
-                 batch_size):
+    def __init__(self, input_viral_dna, input_human_dna, input_bacterial_dna, read_length, num_data, test_fraction,
+                 epochs, batch_size):
         self.input_viral_dna = input_viral_dna
         self.input_human_dna = input_human_dna
         self.input_bacterial_dna = input_bacterial_dna
@@ -21,7 +24,6 @@ class FragmentClassifier(object):
         self.x_train, self.x_test, self.y_train, self.y_test = self.load_and_split()
         self.classifier = self.classifier()
         self.train = self.train()
-
 
     def load_and_split(self):
         virus_file = open(self.input_viral_dna, 'rb')
@@ -63,7 +65,7 @@ class FragmentClassifier(object):
         return model
 
     def train(self):
-        model_checkpoint = ModelCheckpoint('new_mixed_3class.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
+        model_checkpoint = ModelCheckpoint('703_mixed_3class.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
         classifier = self.classifier
         x_train, y_train = self.x_train, self.y_train
         x_test, y_test = self.x_test, self.y_test
