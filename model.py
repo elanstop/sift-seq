@@ -65,7 +65,7 @@ class FragmentClassifier(object):
         return model
 
     def train(self):
-        model_checkpoint = ModelCheckpoint('703_mixed_3class.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
+        model_checkpoint = ModelCheckpoint('saved_model.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
         classifier = self.classifier
         x_train, y_train = self.x_train, self.y_train
         x_test, y_test = self.x_test, self.y_test

@@ -1,6 +1,5 @@
 from Bio import SeqIO
 import pickle
-from random import shuffle
 
 # this file is different from viral_genomes_to_reads in the following ways:
 
@@ -26,7 +25,8 @@ class HumanGenomeData(object):
 	# provide one-hot encoding for each of the nucleotides
 	# lower case letters mapped to the same one-hot symbol
 
-	def make_nucleo_dict(self, genome_type):
+	@staticmethod
+	def make_nucleo_dict(genome_type):
 		if genome_type == 'DNA':
 			nucleo_list = ['A', 'C', 'G', 'T', 'a', 'c', 'g', 't']
 		if genome_type == 'RNA':
@@ -53,14 +53,11 @@ class HumanGenomeData(object):
 				encoded_read.append(new_letter)
 			encoded_reads_list.append(encoded_read)
 		print(len(encoded_reads_list))
-		# for i in range(100):
-		# 	print('---------------------')
-		# 	print('length of read:',len(encoded_reads_list[i]))
-		# 	print(encoded_reads_list[i])
 		return encoded_reads_list
 
 	# we walk along each record, obtaining all possible reads of length equal to read_length
-	def split_reads(self, input_filename, read_length, max_reads):
+	@staticmethod
+	def split_reads(input_filename, read_length, max_reads):
 		reads_list = []
 		for record in SeqIO.parse(input_filename, "fasta"):
 			contig = record.seq
@@ -73,7 +70,7 @@ class HumanGenomeData(object):
 					continue
 				i += 1
 				reads_list.append(this_read)
-			# STOP AFTER THE FIRST RECORD BECAUSE WE DONT NEED ALL THIS DATA!
+			# STOP AFTER THE FIRST RECORD BECAUSE WE DON'T NEED ALL THIS DATA!
 			return reads_list
 
 	def output(self, output_filename):
