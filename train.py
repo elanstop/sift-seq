@@ -1,7 +1,7 @@
-from viral_genomes_to_reads import ViralGenomeData
-from human_genome_to_reads import HumanGenomeData
-from bacterial_genomes_to_reads import BacterialGenomeData
-from model import FragmentClassifier
+from sift_seq.viral_genomes_to_reads import ViralGenomeData
+from sift_seq.human_genome_to_reads import HumanGenomeData
+from sift_seq.bacterial_genomes_to_reads import BacterialGenomeData
+from sift_seq.model import FragmentClassifier
 
 ViralGenomeData("data/raw_viral_reads.fasta", 'data/encoded_viral_reads.txt')
 HumanGenomeData('data/raw_human_reads.fasta', 'data/encoded_human_reads.txt')

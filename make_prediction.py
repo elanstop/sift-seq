@@ -1,5 +1,5 @@
-from encoder import SeqEncoder
-from model_output import ModelOutput
+from sift_seq.encoder import SeqEncoder
+from sift_seq.model_output import ModelOutput
 import sys
 
 SeqEncoder(sys.argv[1], sys.argv[2])
