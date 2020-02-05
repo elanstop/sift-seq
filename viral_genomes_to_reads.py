@@ -44,7 +44,6 @@ class ViralGenomeData(object):
 				new_letter = self.code_dict[str(letter)]
 				this_genome.append(new_letter)
 			genome_list.append(this_genome)
-		print('number of viral genomes in input:', len(genome_list))
 		return genome_list
 
 	# we walk along the genome, obtaining all possible reads of length equal to read_length

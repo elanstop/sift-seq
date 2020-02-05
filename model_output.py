@@ -31,7 +31,6 @@ class ModelOutput(object):
     def load_reads(input_file):
         file = open(input_file, 'rb')
         reads = pickle.load(file)
-        print('number of input reads:', len(reads))
         file.close()
         return reads
 

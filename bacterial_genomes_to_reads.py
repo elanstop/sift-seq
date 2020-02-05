@@ -44,7 +44,6 @@ class BacterialGenomeData(object):
 				new_letter = self.code_dict[str(letter)]
 				encoded_read.append(new_letter)
 			encoded_reads_list.append(encoded_read)
-		print(len(encoded_reads_list))
 		return encoded_reads_list
 
 	# we walk along each record, obtaining all possible reads of length equal to read_length

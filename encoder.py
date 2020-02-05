@@ -27,7 +27,7 @@ class SeqEncoder(object):
 
     def output(self):
         encoded_reads_list = self.one_hot_encoding
-        output_file = open('encoded_reads.txt', 'wb')
+        output_file = open('data/encoded_reads_to_predict.txt', 'wb')
         pickle.dump(encoded_reads_list, output_file)
         output_file.close()
 

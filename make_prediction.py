@@ -1,6 +1,6 @@
 from encoder import SeqEncoder
-from predict import ModelOutput
+from model_output import ModelOutput
 import sys
 
 SeqEncoder(sys.argv[1], sys.argv[2])
-ModelOutput('encoded_reads.txt', sys.argv[2])
+ModelOutput('data/encoded_reads_to_predict.txt', sys.argv[2])
