@@ -52,7 +52,6 @@ class HumanGenomeData(object):
 				new_letter = self.code_dict[str(letter)]
 				encoded_read.append(new_letter)
 			encoded_reads_list.append(encoded_read)
-		print(len(encoded_reads_list))
 		return encoded_reads_list
 
 	# we walk along each record, obtaining all possible reads of length equal to read_length
@@ -62,7 +61,7 @@ class HumanGenomeData(object):
 		for record in SeqIO.parse(input_filename, "fasta"):
 			contig = record.seq
 			i = 0
-			while i < max_reads:
+			while i < max_reads and i < len(contig)-read_length:
 				this_read = contig[i:i+read_length]
 				if 'N' in this_read or 'n' in this_read:
 					i += 1
