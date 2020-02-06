@@ -1,7 +1,15 @@
+import warnings
+warnings.filterwarnings('ignore', category=DeprecationWarning)
+warnings.filterwarnings('ignore', category=FutureWarning)
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 from sift_seq.viral_genomes_to_reads import ViralGenomeData
 from sift_seq.human_genome_to_reads import HumanGenomeData
 from sift_seq.bacterial_genomes_to_reads import BacterialGenomeData
 from sift_seq.model import FragmentClassifier
+
+# the encoded reads file are intermediate files which are saved for potential later use, because one-hot encoding the
+# sequences takes some time
 
 ViralGenomeData("data/raw_viral_reads.fasta", 'data/encoded_viral_reads.txt')
 HumanGenomeData('data/raw_human_reads.fasta', 'data/encoded_human_reads.txt')
