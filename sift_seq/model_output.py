@@ -3,6 +3,8 @@ import pickle
 import tensorflow as tf
 import pandas as pd
 import sys
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
 
 
 # classify reads using the current best pre-trained model, current_best.hdf5
@@ -25,7 +27,7 @@ class ModelOutput(object):
                       loss='binary_crossentropy',
                       metrics=['accuracy'])
 
-        prediction = model.predict(x)
+        prediction = np.round(model.predict(x), decimals=2)
         return prediction
 
     @staticmethod
@@ -41,7 +43,7 @@ class ModelOutput(object):
         df['Viral prob'] = [entry[0] for entry in prediction]
         df['Human prob'] = [entry[1] for entry in prediction]
         df['Bacterial prob'] = [entry[2] for entry in prediction]
-        df.to_csv(output_file)
+        df.to_csv(output_file, float_format='%.3f')
 
     def get_fractions(self):
         viral_count = 0
@@ -58,9 +60,21 @@ class ModelOutput(object):
                 human_count += 1
             if identity == 2:
                 bacterial_count += 1
-        print('Predicted fraction of viral sequences:', viral_count / num_sequences)
-        print('Predicted fraction of human sequences:', human_count / num_sequences)
-        print('Predicted fraction of bacterial sequences:', bacterial_count / num_sequences)
+        viral_fraction = np.round(viral_count/num_sequences, decimals = 2)
+        human_fraction = np.round(human_count/num_sequences, decimals = 2)
+        bacterial_fraction = np.round(bacterial_count/num_sequences, decimals = 2)
+        print('Predicted fraction of viral sequences:', viral_fraction)
+        print('Predicted fraction of human sequences:', human_fraction)
+        print('Predicted fraction of bacterial sequences:', bacterial_fraction)
+        x = np.arange(3)
+        y = [viral_fraction, human_fraction, bacterial_fraction]
+        plt.bar(x, y, color=['green', 'blue', 'cyan'])
+        plt.xticks(x, ('Viral', 'Human', 'Bacterial'))
+        plt.ylabel('Fraction')
+        plt.rcParams.update({'font.size': 22})
+        plt.show()
+        plt.close()
+
 
 
 if __name__ == "__main__":
