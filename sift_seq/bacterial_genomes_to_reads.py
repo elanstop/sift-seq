@@ -8,7 +8,7 @@ from random import shuffle
 class BacterialGenomeData(object):
 	
 	def __init__(
-				self, input_filename, output_filename, read_length=100, genome_type='DNA', max_reads=1.0*10**5):
+				self, input_filename, output_filename, read_length=100, genome_type='DNA', max_reads=1.33*10**5):
 		self.read_set = self.split_reads(input_filename, read_length, max_reads)
 		self.code_list, self.code_dict = self.make_nucleo_dict(genome_type)
 		self.one_hot_encoding = self.encoding()
@@ -72,7 +72,8 @@ class BacterialGenomeData(object):
 
 
 if __name__ == "__main__":
-	BacterialGenomeData("testing_bacterial_genomes.fasta", "testing_bacterial_reads.txt")
+	BacterialGenomeData("/Users/elanstopnitzky/Insight_Project/training_bacterial_genomes.fasta",
+						"405_thousand_training_bacterial_reads.txt")
 
 
 

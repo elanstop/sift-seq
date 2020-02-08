@@ -1,8 +1,8 @@
 import numpy as np
 import pickle
-# import tensorflow as tf
+import tensorflow as tf
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, LSTM, Dropout, Conv1D
+from tensorflow.keras.layers import Dense, LSTM, Dropout, Conv1D, CuDNNLSTM
 from tensorflow.keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import train_test_split
 
@@ -58,7 +58,12 @@ class FragmentClassifier(object):
         # dropout layer below is new
         model.add(Dropout(0.5))
         # model.add(LSTM(97, input_shape=(97, 8)))
-        model.add(LSTM(100))
+        if tf.test.is_gpu_available():
+            print("Found GPU - Training with CuDNNLSTM")
+            model.add(CuDNNLSTM(100, return_sequences=False))
+        else:
+            model.add(LSTM(100, return_sequences=False))
+        # model.add(LSTM(100))
         model.add(Dropout(0.5))
         model.add(Dense(3, activation='softmax'))
         # model.compile(optimizer=Adam(), loss='binary_crossentropy', metrics=['accuracy'])
@@ -66,7 +71,7 @@ class FragmentClassifier(object):
         return model
 
     def train(self):
-        model_checkpoint = ModelCheckpoint('saved_model.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
+        model_checkpoint = ModelCheckpoint('super_model.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
         classifier = self.classifier
         x_train, y_train = self.x_train, self.y_train
         x_test, y_test = self.x_test, self.y_test
@@ -75,6 +80,8 @@ class FragmentClassifier(object):
 
 
 if __name__ == "__main__":
-    FragmentClassifier('training_viral_reads.txt', 'human_reads.txt', 'training_bacterial_reads.txt', read_length=100,
-                       num_data=50000, test_fraction=0.2,
-                       epochs=10, batch_size=100)
+    FragmentClassifier('encoded_viral_reads.txt',
+                       'encoded_human_reads.txt',
+                       'encoded_bacterial_reads.txt', read_length=100,
+                       num_data=395000, test_fraction=0.2,
+                       epochs=20, batch_size=100)
