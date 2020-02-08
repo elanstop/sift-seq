@@ -10,13 +10,6 @@ RUN conda install -c conda-forge biopython
 RUN conda install -c anaconda scikit-learn
 RUN conda install -c anaconda pandas
 
-
-# COPY predict.py /
-# COPY encoder.py /
-# COPY main.py /
-# COPY mini_bacterial_input_for_full_test.fasta /
-# COPY current_best.hdf5 /
-
 RUN mkdir /data
 
 COPY data /data

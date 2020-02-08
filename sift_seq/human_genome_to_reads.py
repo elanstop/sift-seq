@@ -16,7 +16,7 @@ import pickle
 class HumanGenomeData(object):
 	
 	def __init__(
-				self, input_filename, output_filename, read_length=100, genome_type='DNA', max_reads=6*10**5):
+				self, input_filename, output_filename, read_length=100, genome_type='DNA', max_reads=4*10**5):
 		self.read_set = self.split_reads(input_filename, read_length, max_reads)
 		self.code_list, self.code_dict = self.make_nucleo_dict(genome_type)
 		self.one_hot_encoding = self.encoding()
