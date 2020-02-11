@@ -11,16 +11,11 @@ RUN conda install -c anaconda scikit-learn
 RUN conda install -c anaconda pandas
 
 RUN mkdir /data
+RUN mkdir /saved_models
+RUN mkdir /sift_seq
 
 COPY data /data
-COPY bacterial_genomes_to_reads.py /
-COPY current_best.hdf5 /
-COPY encoder.py /
-COPY human_genome_to_reads.py /
-COPY make_prediction.py /
-COPY model.py /
-COPY model_output.py /
-COPY train.py /
-COPY viral_genomes_to_reads.py /
+COPY saved_models /saved_models
+COPY sift_seq /sift_seq
 
 
