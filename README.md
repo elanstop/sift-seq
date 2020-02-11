@@ -31,7 +31,7 @@ docker run -it siftseq
 To examine predictions, e.g., for the input file raw_human_reads.fasta contained in the data folder, run the following from within the container:
 
 ```shell
-python make_prediction.py data/raw_human_reads.fasta output.csv
+python sift_seq/make_prediction.py data/raw_human_reads.fasta output.csv
 ```
 
 where output.csv is the chosen name of the output file that will hold the predictions. More generally, input files stored on your machine may be copied to the container using [docker cp](https://docs.docker.com/engine/reference/commandline/cp/).
@@ -39,10 +39,10 @@ where output.csv is the chosen name of the output file that will hold the predic
 To train the model using the example data, run the following from within the container:
 
 ```shell
-python train.py
+python sift_seq/train.py
 ```
 
-Trained models are saved after each epoch and labelled with their validation accuracy. To supply your own training data, simply use [docker cp](https://docs.docker.com/engine/reference/commandline/cp/) to transfer files to the container, and modify the paths within train.py to point to your chosen files.
+Trained models are saved in the saved_models folder after each epoch and labelled with their validation accuracy. To supply your own training data, simply use [docker cp](https://docs.docker.com/engine/reference/commandline/cp/) to transfer files to the container, and modify the paths within train.py to point to your chosen files.
 
 # Contact
 
