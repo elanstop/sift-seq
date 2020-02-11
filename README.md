@@ -1,5 +1,5 @@
 # SiftSeq
-A neural network model that predicts whether 100-base sequences of DNA are viral, human, or bacterial in origin
+A CNN+LSTM neural network model that predicts whether 100-base sequences of DNA are viral, human, or bacterial in origin
 
 # Contents
 
@@ -47,6 +47,10 @@ python train.py
 ```
 
 Trained models are saved after each epoch and labelled with their validation accuracy. To supply your own training data, simply use [docker cp](https://docs.docker.com/engine/reference/commandline/cp/) to transfer files to the container, and modify the paths within train.py to point to your chosen files.
+
+# Contact
+
+Elan Stopnitzky, e.stopnitzky@gmail.com
 
 
 
