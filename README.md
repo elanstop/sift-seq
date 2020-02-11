@@ -3,17 +3,13 @@ A CNN+LSTM neural network model that predicts whether 100-base sequences of DNA 
 
 # Contents
 
-- **data**: contains small fasta files to make sure train.py and make_prediction.py run properly
+- **data**: contains small fasta files used for checking that things run properly
 
-- **sift_seq**: classes used in training and prediction
+- **saved_models**: saved models produced during training
+
+- **sift_seq**: scripts used in training and prediction
 
 - **Dockerfile**: the file from which the docker image for this project is built
-
-- **current_best.hdf5**: the best pre-trained model found to date
-
-- **make_prediction.py**: the script for predicting sequence origins
-
-- **make_prediction.py**: the script for training the neural network
 
 # Installation
 
