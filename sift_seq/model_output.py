@@ -22,7 +22,7 @@ class ModelOutput(object):
 
         x = np.array(reads)
 
-        model = tf.keras.models.load_model('current_best.hdf5')
+        model = tf.keras.models.load_model('/saved_models/current_best.hdf5')
         model.compile(optimizer='Adam',
                       loss='binary_crossentropy',
                       metrics=['accuracy'])

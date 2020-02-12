@@ -9,6 +9,8 @@ RUN conda install -c conda-forge tensorflow=1.13.1
 RUN conda install -c conda-forge biopython
 RUN conda install -c anaconda scikit-learn
 RUN conda install -c anaconda pandas
+RUN conda install -c conda-forge matplotlib
+
 
 RUN mkdir /data
 RUN mkdir /saved_models

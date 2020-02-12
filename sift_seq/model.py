@@ -51,27 +51,21 @@ class FragmentClassifier(object):
 
     def classifier(self):
         model = Sequential()
-        # model.add(Dropout(0.5))
         model.add(Dropout(0.2, input_shape=(self.read_length, 4)))
-        # model.add(Conv1D(8, 4, input_shape=(self.read_length, 4), activation='relu'))
         model.add(Conv1D(8, 4, activation='relu'))
-        # dropout layer below is new
         model.add(Dropout(0.5))
-        # model.add(LSTM(97, input_shape=(97, 8)))
         if tf.test.is_gpu_available():
             print("Found GPU - Training with CuDNNLSTM")
             model.add(CuDNNLSTM(100, return_sequences=False))
         else:
             model.add(LSTM(100, return_sequences=False))
-        # model.add(LSTM(100))
         model.add(Dropout(0.5))
         model.add(Dense(3, activation='softmax'))
-        # model.compile(optimizer=Adam(), loss='binary_crossentropy', metrics=['accuracy'])
         model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
         return model
 
     def train(self):
-        model_checkpoint = ModelCheckpoint('/sift-seq/saved_models/super_model.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
+        model_checkpoint = ModelCheckpoint('/saved_models/super_model.{epoch:02d}-{val_categorical_accuracy:.2f}.hdf5')
         classifier = self.classifier
         x_train, y_train = self.x_train, self.y_train
         x_test, y_test = self.x_test, self.y_test
