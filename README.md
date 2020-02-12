@@ -1,5 +1,5 @@
 # SiftSeq
-A CNN+LSTM neural network model that predicts whether 100-base sequences of DNA are viral, human, or bacterial in origin
+A state-of-the-art CNN+LSTM neural network model that predicts whether short sequences of DNA are viral, human, or bacterial in origin
 
 # Contents
 
