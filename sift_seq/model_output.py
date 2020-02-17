@@ -4,7 +4,6 @@ import tensorflow as tf
 import pandas as pd
 import sys
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
 
 
 # classify reads using the current best pre-trained model, current_best.hdf5
@@ -60,9 +59,9 @@ class ModelOutput(object):
                 human_count += 1
             if identity == 2:
                 bacterial_count += 1
-        viral_fraction = np.round(viral_count/num_sequences, decimals = 2)
-        human_fraction = np.round(human_count/num_sequences, decimals = 2)
-        bacterial_fraction = np.round(bacterial_count/num_sequences, decimals = 2)
+        viral_fraction = np.round(viral_count / num_sequences, decimals=2)
+        human_fraction = np.round(human_count / num_sequences, decimals=2)
+        bacterial_fraction = np.round(bacterial_count / num_sequences, decimals=2)
         print('Predicted fraction of viral sequences:', viral_fraction)
         print('Predicted fraction of human sequences:', human_fraction)
         print('Predicted fraction of bacterial sequences:', bacterial_fraction)
@@ -74,7 +73,6 @@ class ModelOutput(object):
         plt.rcParams.update({'font.size': 22})
         plt.show()
         plt.close()
-
 
 
 if __name__ == "__main__":
