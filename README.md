@@ -18,12 +18,12 @@ A state-of-the-art CNN+LSTM neural network model that predicts whether short seq
 2. Pull the docker image for SiftSeq from Docker Hub. On the command line, type
 
 ```shell
-docker pull siftseq
+docker pull elanstop/sift-seq:latest
 ```
 3. Run a container from this image. On the command line, type
 
 ```shell
-docker run -it siftseq
+docker run -it elanstop/sift-seq:latest
 ```
 
 # Usage
