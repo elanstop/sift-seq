@@ -1,6 +1,10 @@
 # SiftSeq
 A state-of-the-art CNN+LSTM neural network model that predicts whether short sequences of DNA are viral, human, or bacterial in origin
 
+# Performance
+SiftSeq significantly outperforms benchmarks set by the recent classifiers ViraMiner and VirNet, while being able to handle more classes and shorter sequences.
+![](images/performance2.png)
+
 # Contents
 
 - **data**: contains small fasta files used for checking that things run properly
