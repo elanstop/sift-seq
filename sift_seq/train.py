@@ -13,7 +13,7 @@ from model import FragmentClassifier
 # see preprocess.py to control details of preprocessing
 ProcessGenomeData("/data/raw_viral_reads.fasta", '/data/0216_encoded_viral_reads.txt')
 ProcessGenomeData("/data/raw_human_reads.fasta", '/data/0216_encoded_human_reads.txt')
-ProcessGenomeData("/data/raw_human_reads.fasta", '/data/0216_encoded_bacterial_reads.txt')
+ProcessGenomeData("/data/raw_bacterial_reads.fasta", '/data/0216_encoded_bacterial_reads.txt')
 
 # num_data refers to how many points should be pulled from each of the three files
 FragmentClassifier('/data/0216_encoded_viral_reads.txt', '/data/0216_encoded_human_reads.txt',
