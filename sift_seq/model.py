@@ -40,7 +40,7 @@ class FragmentClassifier(object):
         bacterial_file = open(self.input_bacterial_dna, 'rb')
         bacterial_reads = pickle.load(bacterial_file)
         print('total number of bacterial reads in input:', len(bacterial_reads))
-        human_file.close()
+        bacterial_file.close()
 
         x = np.array(viral_reads[:self.num_data] + human_reads[:self.num_data] + bacterial_reads[:self.num_data])
         y = np.array([[0, 0, 1]] * self.num_data + [[0, 1, 0]] * self.num_data + [[1, 0, 0]] * self.num_data)
